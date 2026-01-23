@@ -867,7 +867,7 @@ public class InteractiveGraphView extends RelativeLayout implements GraphView.Po
     @Override
     public void spectroscopyCalibrationDidStart(SpectroscopyCalibrationManager manager) {
         spectroscopyStatusLabel.setText(getResources().getString(R.string.spectroscopy_tap_first_point));
-        spectroscopyStatusLabel.setVisibility(VISIBLE);
+        spectroscopyStatusLabel.setVisibility(GONE);
         clearCalibrationMarkers();
         markerOverlayView.update(null, null);
         graphView.resetPicks();

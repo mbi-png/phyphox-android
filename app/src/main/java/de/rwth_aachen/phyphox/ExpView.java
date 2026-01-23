@@ -23,6 +23,7 @@ import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.method.DigitsKeyListener;
 import android.text.style.MetricAffectingSpan;
+import android.transition.Visibility;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
@@ -574,10 +575,10 @@ public class ExpView implements Serializable{
         @Override
         //We just have to send calculated value and the unit to the textView
         protected void onMayReadFromBuffers(PhyphoxExperiment experiment) {
+            super.onMayReadFromBuffers(experiment);
             if (!needsUpdate)
                 return;
             needsUpdate = false;
-            super.onMayReadFromBuffers(experiment);
             double x = experiment.getBuffer(inputs.get(0)).value;
             if (tv != null) {
                 String vStr = "";
@@ -1398,10 +1399,10 @@ public class ExpView implements Serializable{
 
         @Override
         protected void onMayReadFromBuffers(PhyphoxExperiment experiment) {
+            super.onMayReadFromBuffers(experiment);
             if (!needsUpdate)
                 return;
             needsUpdate = false;
-            super.onMayReadFromBuffers(experiment);
 
             if(dynamicBuffer == null){
                 return;
@@ -1912,10 +1913,10 @@ public class ExpView implements Serializable{
 
         @Override
         protected void onMayReadFromBuffers(PhyphoxExperiment experiment) {
+            super.onMayReadFromBuffers(experiment);
             if (!needsUpdate)
                 return;
             needsUpdate = false;
-            super.onMayReadFromBuffers(experiment);
             for (int i = 0; i < inputs.size(); i+=2) {
                 if (inputs.size() > i+1) {
                     DataBuffer x = experiment.getBuffer(inputs.get(i+1));
@@ -3347,10 +3348,10 @@ public class ExpView implements Serializable{
 
         @Override
         protected void onMayReadFromBuffers(PhyphoxExperiment experiment) {
+            super.onMayReadFromBuffers(experiment);
             if (!needsUpdate || triggered || autoCompleteTextView == null)
                 return;
             needsUpdate = false;
-            super.onMayReadFromBuffers(experiment);
             double x = experiment.getBuffer(inputs.get(0)).value;
 
             int index= -1;
@@ -3694,10 +3695,10 @@ public class ExpView implements Serializable{
 
         @Override
         protected void onMayReadFromBuffers(PhyphoxExperiment experiment) {
+            super.onMayReadFromBuffers(experiment);
             if (!needsUpdate || triggered)
                 return;
             needsUpdate = false;
-            super.onMayReadFromBuffers(experiment);
             if (inputs.size() == 0)
                 return;
             double value = experiment.getBuffer(inputs.get(0)).value;
