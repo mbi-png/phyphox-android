@@ -254,20 +254,6 @@ public class SpectroscopyCalibrationManager {
         }
     }
 
-    public String getCalibrationInfo() {
-        if (calibrationParameters == null) {
-            return null;
-        }
-
-        DecimalFormat formatter = new DecimalFormat("#.####");
-        formatter.setMinimumFractionDigits(2);
-
-        String slopeStr = formatter.format(calibrationParameters.slope);
-        String interceptStr = formatter.format(calibrationParameters.intercept);
-
-        return "Calibrated: a- " + slopeStr + ",  b- " + interceptStr;
-    }
-
     // Helper method for getting localized strings
     private String getString(String key) {
         int resId = context.getResources().getIdentifier(key, "string", context.getPackageName());
