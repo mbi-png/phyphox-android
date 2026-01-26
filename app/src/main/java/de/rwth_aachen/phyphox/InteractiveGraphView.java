@@ -155,14 +155,6 @@ public class InteractiveGraphView extends RelativeLayout implements GraphView.Po
                         return true;
                     case R.id.graph_tools_calibrate:
                         removePopUpAndMarkerOverlayView();
-                        Log.d("Interactive", "calibrationMode"+calibrationMode);
-                        Log.d("Interactive", "calibrationMarkerViews"+calibrationMarkerViews.size());
-                        if(calibrationMarkerViews.size() > 0){
-                            Log.d("Interactive", "calibrationMarkerViews"+calibrationMarkerViews.get(0).getVisibility());
-                        }
-
-                        Log.d("Interactive", "enableCalibrationMode"+enableCalibrationMode);
-                        Log.d("Interactive", "marker"+marker.length);
                         graphView.setTouchMode(GraphView.TouchMode.calibrate);
                         if(!graphView.isSpectroscopyCalibrated) spectroscopyCalibrationManager.resetCalibration();
                         return true;
@@ -825,6 +817,7 @@ public class InteractiveGraphView extends RelativeLayout implements GraphView.Po
             this.calibrationMode = calibrationMode;
             this.enableCalibrationMode = true;
         } else {
+            this.enableCalibrationMode = false;
             return;
         }
 
