@@ -10,7 +10,6 @@ import android.graphics.Point
 import android.graphics.PorterDuff
 import android.graphics.RectF
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.Surface
@@ -20,11 +19,9 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.WindowManager
 import android.view.animation.AlphaAnimation
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.Spinner
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.content.res.AppCompatResources
@@ -79,8 +76,7 @@ class CameraPreviewScreen(
         private val toggleExclusive: () -> Boolean,
         val grayscale: Boolean,
         val markOverexposure: RGB?,
-        val markUnderexposure: RGB?
-): AdapterView.OnItemSelectedListener {
+        val markUnderexposure: RGB?) {
 
     private val context: Context = root.context
 
@@ -95,9 +91,7 @@ class CameraPreviewScreen(
     private val buttonMaximize: ImageView = root.findViewById(R.id.imageMaximize)
     private val buttonMinimize: ImageView = root.findViewById(R.id.imageMinimize)
 
-    private val spinnerSpectrumOrientation: Spinner = root.findViewById(R.id.btnSelectSpectroscopyOrientation)
     private val btnAnalysisSetting: MaterialButton = root.findViewById(R.id.imgAnalysisSetting)
-    private val txtAnalysisOrientation: TextView = root.findViewById(R.id.textSpec)
     private val lnrSpectrumOrientation: LinearLayoutCompat = root.findViewById(R.id.lnrSpectroscopyAnalysisControl)
 
     private val zoomSlider: Slider = root.findViewById(R.id.zoomSlider)
@@ -237,8 +231,6 @@ class CameraPreviewScreen(
         if(cameraInput.isFeatureSpectroscopy()){
             lnrSpectrumOrientation.visibility = View.VISIBLE
             btnAnalysisSetting.setOnClickListener {  openAnalysisConfigurationDialog() }
-            createSpinnerForSpectrumOrientation()
-            spinnerSpectrumOrientation.onItemSelectedListener  = this
         }
     }
 
@@ -917,35 +909,6 @@ class CameraPreviewScreen(
         root.findViewTreeLifecycleOwner()?.lifecycleScope?.launch {
             _action.emit(CameraUiAction.CameraSettingValueSelected)
         }
-    }
-
-    fun createSpinnerForSpectrumOrientation(){
-        ArrayAdapter.createFromResource(
-            context,
-            R.array.spectroscopy_orientation_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerSpectrumOrientation.adapter = adapter
-        }
-    }
-
-    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-        // An item is selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos).
-        Log.d("Spinner", "item: "+ parent.getItemAtPosition(pos))
-        var orientation: SpectrumOrientation = SpectrumOrientation.INVALID
-        when(parent.getItemAtPosition(pos)){
-            "Horizontal Red Right" -> orientation = SpectrumOrientation.HORIZONTAL_RED_RIGHT
-            "Horizontal Blue Right" -> orientation = SpectrumOrientation.HORIZONTAL_BLUE_RIGHT
-            "Vertical Red Top" -> orientation = SpectrumOrientation.VERTICAL_RED_UP
-            "Vertical Blue Top" -> orientation = SpectrumOrientation.VERTICAL_BLUE_UP
-        }
-        cameraInput.changeSpectrumAnalysisOrientation(orientation)
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>) {
-        // Another interface callback.
     }
 
     fun getSelectedSpectrumOrientation(isHorizontal: Boolean, isRedToBlue: Boolean) : SpectrumOrientation {
