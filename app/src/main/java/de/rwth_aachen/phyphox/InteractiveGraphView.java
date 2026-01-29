@@ -741,6 +741,9 @@ public class InteractiveGraphView extends RelativeLayout implements GraphView.Po
 
         }
         else if (marker[0].active || marker[1].active) {
+            if(graphView.isSpectroscopyCalibrated){
+                return;
+            }
 
             int pos[] = new int[2];
             graphView.getLocationInWindow(pos);
