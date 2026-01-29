@@ -180,13 +180,6 @@ public class ExpViewFragment extends Fragment {
         if(getActivity() == null){
             return;
         }
-        // In the spectroscopy, user is able to choose which orientation should the analysis be done,
-        // So to not further confuse the user, orientation is set fixed to portait.
-        // This makes whole activity's orientation locked, which is by the way, is not good solution.
-        // Need to discuss.
-        if(((Experiment) getActivity()).experiment.cameraInput.isFeatureSpectroscopy()){
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-        }
         recreateView();
     }
 
@@ -199,9 +192,6 @@ public class ExpViewFragment extends Fragment {
             for (ExpView.expViewElement element : ((Experiment) getActivity()).experiment.experimentViews.elementAt(index).elements) {
                 element.destroyView();
             }
-        }
-        if(((Experiment) getActivity()).experiment.cameraInput.isFeatureSpectroscopy()){
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
     }
 
