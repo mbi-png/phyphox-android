@@ -13,12 +13,11 @@
         android:textStyle="bold"
         android:layout_marginBottom="8dp" />
 
-    <TextView
+    <ImageView
+        android:id="@+id/imgAnalysisOrientation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/spectrum_analysis_setting_message"
-        android:textSize="12sp"
-        android:textStyle="normal"
+        android:src="@drawable/arrow_gradient_right"
         android:layout_marginBottom="16dp" />
 
     <TextView

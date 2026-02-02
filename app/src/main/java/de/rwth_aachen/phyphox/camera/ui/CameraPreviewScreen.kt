@@ -237,6 +237,8 @@ class CameraPreviewScreen(
     private fun openAnalysisConfigurationDialog() {
 
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_analysis_settings, null)
+        // Proper image resource needs to be created to add in this imageview.
+        val imageOrientation : ImageView = dialogView.findViewById(R.id.imgAnalysisOrientation)
         val btnBR: Button = dialogView.findViewById(R.id.btnBR)
         val btnRB: Button = dialogView.findViewById(R.id.btnRB)
         val axisToggle: MaterialButtonToggleGroup = dialogView.findViewById(R.id.axisToggle)
@@ -267,6 +269,9 @@ class CameraPreviewScreen(
                 setIconResource(iconRes)
                 iconTint = null
             }
+            imageOrientation.apply {
+                setImageResource(iconRes)
+            }
         }
 
         updateLabels()
@@ -280,7 +285,6 @@ class CameraPreviewScreen(
                 updateLabels()
                 applyChanges()
             }
-
         }
 
         directionToggle.addOnButtonCheckedListener { _, checkedId, isChecked ->
