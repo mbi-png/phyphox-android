@@ -41,7 +41,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.rwth_aachen.phyphox.Helper.Helper;
+import de.rwth_aachen.phyphox.helper.Helper;
 
 public class InteractiveGraphView extends RelativeLayout implements GraphView.PointInfo, SpectroscopyCalibrationManager.SpectroscopyCalibrationDelegate {
 

@@ -6,14 +6,19 @@ import static android.view.View.VISIBLE;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.InputType;
+import android.view.OrientationEventListener;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+
+import de.rwth_aachen.phyphox.camera.analyzer.SpectrumOrientation;
 
 public class SpectroscopyCalibrationManager {
 
@@ -309,3 +314,7 @@ class CalibrationGraphUtility {
         }
     }
 }
+
+
+
+

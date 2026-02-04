@@ -67,13 +67,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
-import de.rwth_aachen.phyphox.Helper.Helper;
+import de.rwth_aachen.phyphox.helper.Helper;
 import de.rwth_aachen.phyphox.camera.CameraPreviewFragment;
 import de.rwth_aachen.phyphox.camera.Scrollable;
 import de.rwth_aachen.phyphox.camera.depth.DepthInput;
 import de.rwth_aachen.phyphox.camera.depth.DepthPreview;
-import de.rwth_aachen.phyphox.Helper.DecimalTextWatcher;
-import de.rwth_aachen.phyphox.Helper.RGB;
+import de.rwth_aachen.phyphox.helper.DecimalTextWatcher;
+import de.rwth_aachen.phyphox.helper.RGB;
 import de.rwth_aachen.phyphox.NetworkConnection.NetworkConnection;
 import de.rwth_aachen.phyphox.NetworkConnection.NetworkService;
 import de.rwth_aachen.phyphox.camera.model.CameraSettingLevel;
