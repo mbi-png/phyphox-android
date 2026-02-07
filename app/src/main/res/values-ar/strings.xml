@@ -1,2 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">مختبر الفيزياء</string>
+    <string name="action_settings">الإعدادات</string>
+    <string name="title_activity_experiment">مختبر الفيزياء على الهاتف</string>
+    <string name="graph_tools_pan_and_zoom">التحريك و التكبير</string>
+    <string name="graph_tools_pick">إختيار البيانات</string>
+    <string name="graph_tools_more">أدوات إضافية</string>
+    <string name="graph_tools_system_time">إستخدام وقت النظام</string>
+    <string name="graph_tools_reset">إعادة التكبير للوضع الإفتراضي</string>
+    <string name="graph_tools_follow">متابعة البيانات الجديدة</string>
+    <string name="graph_tools_linear_fit">التقريب الخطي</string>
+    <string name="graph_tools_export">تصدير هذه البيانات</string>
+    <string name="graph_tools_log_x">المحور X بمقياس لوغاريتمي</string>
+    <string name="graph_tools_log_y">المحور Y بمقياس لوغاريتمي</string>
+    <string name="graph_point_label">نقطة</string>
+    <string name="graph_slope_label">الميل</string>
+    <string name="graph_difference_label">الفرق</string>
+    <string name="graph_fit_label">الملاءمة الخطية : y = a x + b</string>
+    <string name="applyZoomTitle">تطبيق التكبير</string>
+    <string name="applyZoomExplanation">بينما تقوم بإغلاق الوضع التفاعلي لهذا الرسم، يمكنك اختيار ما إذا كنت تريد الحفاظ على التكبير الحالي.</string>
+    <string name="applyZoomAdvanced">خيارات متقدمة</string>
+    <string name="applyZoomApply">تطبيق على …</string>
+    <string name="applyZoomReset">إستعادة الوضع الإفتراضي</string>
+    <string name="applyZoomKeep">الحفاظ على الإختيار الحالي</string>
+    <string name="applyZoomFollow">الحفاظ على الوضع الحالي ومتابعة البيانات الجديدة</string>
+    <string name="applyZoomThis">فقط هذا الرسم البياني</string>
+    <string name="applyZoomSameVariable">الرسوم البيانية الأخري : نفس المتغير</string>
+    <string name="applyZoomSameUnit">الرسوم البيانية الأخري : نفس الوحدة</string>
+    <string name="applyZoomSameAxis">الرسوم البيانية الأخري : نفس المحاور</string>
+    <string name="newExperiment">إضافة تجارب</string>
+    <string name="newExperimentSimple">إضافة تجارب بسيطة</string>
+    <string name="newExperimentPhyphoxInfo">قم بزيارة phyphox.org لإنشاء تجارب أكثر تقدّمًا، بما في ذلك تحليل البيانات، ومشاركتها مع الزملاء ,الطلاب والأصدقاء.</string>
+    <string name="newExperimentInputTitle">العنوان</string>
+    <string name="newExperimentInputBufferSize">سعة الذاكرة المؤقتة (عدد القيم التي سيتم تخزينها)</string>
+    <string name="newExperimentInputRate">تردد المستشعر (بالهرتز، 0 = بأقصى سرعة ممكنة)</string>
+    <string name="newExperimentInputSensors">المستشعرات النشطة</string>
+    <string name="newExperimentBluetooth">إضافة تجربة لجهازة البلوتوث</string>
+    <string name="newExperimentBluetoothErrorTitle">خطأ في بحث البلوتوث</string>
+    <string name="newExperimentBluetoothLoadFromDevice">إستيراد من الجهاز</string>
+    <string name="newExperimentBluetoothLoadFromDeviceInfo">يقدّم هذا الجهاز تجربة خاصة بـ Phyphox. اختر \"تحميل من الجهاز\" لفتحها.</string>
+    <string name="newExperimentQR">إضافة تجربة باستخدام رمز QR</string>
+    <string name="newExperimentQRscan">امسح رمز QR يحتوي على تجربة Phyphox</string>
+    <string name="newExperimentQRErrorTitle">خطأ في رمز QR</string>
+    <string name="newExperimentQRNoExperiment">يتعذر العثور على رمز QR الذي يحتوي على تجربة Phyphox</string>
+    <string name="newExperimentQRcrcMismatch">يبدو أن رمز QR الذي مسحته للتو لا يتطابق مع الرموز السابقة. يرجى التأكد من مسح الرموز التابعة لنفس التجربة فقط.</string>
+    <string name="newExperimentQRCodesMissing1">رمز QR الذي مسحته للتو هو جزء من مجموعة من</string>
+    <string name="newExperimentQRCodesMissing2">الرموز. يرجى الضغط على متابعة لمسح الرموز المتبقية. الرموز لا تزال مفقودة:</string>
+    <string name="activate_all">تفعيل الكل</string>
+    <string name="deactivate_all">إلغاء تفعيل الكل</string>
+    <string name="privacyPolicyURL">https://phyphox.org/privacy</string>
+</resources>
