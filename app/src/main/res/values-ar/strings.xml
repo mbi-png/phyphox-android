@@ -49,4 +49,25 @@
     <string name="activate_all">تفعيل الكل</string>
     <string name="deactivate_all">إلغاء تفعيل الكل</string>
     <string name="privacyPolicyURL">https://phyphox.org/privacy</string>
+    <string name="newExperimentQRBadCRC">فشلت خوارزمية التأكد. هذا يعني إما أن رمز QR تالف أو حدث خطأ أثناء مسحه.</string>
+    <string name="newExperimentBTReadErrorTitle">خطأ في تجربة بلوتوث</string>
+    <string name="newExperimentBTReadErrorCorrupted">بيانات التجربة التي تم إرسالها تالفة.</string>
+    <string name="generalErrorDialog">حدث خطأ ما.</string>
+    <string name="help">دعم و معلومات</string>
+    <string name="experimentsPhyphoxOrg">أفكار و إرشادات التجارب</string>
+    <string name="experimentsPhyphoxOrgURL">http://phyphox.org/experiments</string>
+    <string name="faqPhyphoxOrg">الأسئلة الشائعة</string>
+    <string name="faqPhyphoxOrgURL">http://phyphox.org/faq</string>
+    <string name="remotePhyphoxOrg">مساعدة للتحكم عن بُعد</string>
+    <string name="remotePhyphoxOrgURL">http://phyphox.org/remote-control</string>
+    <string name="translationToWebsiteURL">http://phyphox.org/languages#en</string>
+    <string name="deviceInfo">معلومات الجهاز</string>
+    <string name="copyToClipboard">نسخ إلى الحافظة</string>
+    <string name="deviceInfoCopied">تم نسخ معلومات الجهاز إلى الحافظة.</string>
+    <string name="warning">تحذير</string>
+    <string name="donotshowagain">عدم الإظهار مرة أخرى</string>
+    <string name="damageWarning">يرجى الحذر من إتلاف هاتفك أثناء إجراء التجارب. يرجى توخي الحذر الشديد لتجنب إسقاطه على أسطح صلبة، وعدم تعريضه لمجالات مغناطيسية قوية. مطورو \"Phyphox - مختبر الفيزياء\" غير مسؤولين عن أي أضرار تلحق بهاتفك.</string>
+    <string name="info">معلومات</string>
+    <string name="credits">الحقوق و التقدير</string>
+    <string name="creditsRWTH">تم تطوير phyphox® بمعهد الفيزياء الثاني بجامعة\" آخن\" (RWTH Aachen.</string>
 </resources>
