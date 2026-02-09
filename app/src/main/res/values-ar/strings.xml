@@ -70,4 +70,142 @@
     <string name="info">معلومات</string>
     <string name="credits">الحقوق و التقدير</string>
     <string name="creditsRWTH">تم تطوير phyphox® بمعهد الفيزياء الثاني بجامعة\" آخن\" (RWTH Aachen.</string>
+    <string name="creditsNames">الفكرة و التطوير:
+\nالدكتور.سيباستيان ستاك
+\nالفكرة:
+\nالبروقيسور.كريستوف ستامفر
+\nالبرمجة:
+\nقوراف تريباثي
+\nدومينيك دورسال
+\nجوناس جيسنر
+\nكاميلا لوميرزهايم</string>
+    <string name="gpl">تطبيق ®phyphox هو برنامج مفتوح المصدر تم إصداره بموجب رخصة \"جنو\" العمومية (GNU General Public Licence). يرجى زيارة http://phyphox.org لمزيد من المعلومات وللوصول إلى الكود المصدري الخاص به. ومع ذلك، فإن اسم \"phyphox\" واسم \"RWTH Aachen\" هما علامتان تجاريتان مسجلتان.</string>
+    <string name="creditsLibs">تستخدم واجهة الويب للتحكم عن بُعد خادم Java Lightweight HTTP Server المعروف اختصارًا بـ (jlhttp) و المندرج تحت رخصة \"جنو\" العمومية العامة(GNU GPL v2) الإصدار 2، كما تستخدم مكتبة \"Chart.js\"من JavaScript بـ (http://chartjs.org) لتمثيل البيانات، وهي متاحة بموجب رخصة MIT. و لإجراء تحويل فورييه، نستخدم مكتبة FFTW من (http://fftw.org)، حقوق النشر © 2003، 2007-11 محفوظة لـ \"ماتيو فريغو\"، حقوق النشر © 2003، 2007-11 محفوظة لـ \"معهد ماساتشوستس للتقنية\" MIT، و هي متاحة تحت رخصة \"جنو\" العمومية العامة (الإصدار 2 أو أحدث). يتم تحويل بيانات الإرتفاع الخاصة بنظام تحديد المواقع GPS من النظام الإهليجي (WGS84 ellipsoid) إلى نظام الجيود (EGM84 geoid) بإستخدام بيانات EGM84 (بدقة 30 دقيقة قوسية - 30\' resolution)، إضافة إلى دالة منقولة من مكتبة GeographicLib (https://geographiclib.sourceforge.io) المتاحة بموجب رخصة (MIT/X11).</string>
+    <string name="sensorLinearAcceleration">التسارع الخطي</string>
+    <string name="sensorLight">الضوء</string>
+    <string name="sensorGyroscope">مقياس سرعة الدوران (الجيروسكوب)</string>
+    <string name="sensorAccelerometer">مقياس التسارع</string>
+    <string name="sensorMagneticField">المجال المغناطيسي</string>
+    <string name="sensorPressure">الضغط</string>
+    <string name="sensorTemperature">درجة الحرارة</string>
+    <string name="sensorHumidity">الرطوبة</string>
+    <string name="sensorProximity">التقارب</string>
+    <string name="sensorAttitude">الوضعية</string>
+    <string name="sensorVendor">خاص بالمُصنِّع</string>
+    <string name="sensorDepth">العمق (LiDAR/ToF)</string>
+    <string name="sensorCamera">الكاميرا</string>
+    <string name="vendorSensorTitle">مستشعر خاص بالشركة المصنعة</string>
+    <string name="vendorSensorWarning1">المستشعر</string>
+    <string name="vendorSensorWarning2">لا يقدم هذا المستشعر نوعه الصحيح. يبدو أنه خاص بالشركة المصنعة ولا يمكننا سوى تخمين نوعه من خلال اسمه. لذا، قد لا يعمل بالشكل المتوقع.</string>
+    <string name="location">الموقع</string>
+    <string name="sensorNotAvailableWarningTitle">المستشعر غير متاح.</string>
+    <string name="sensorNotAvailableWarningText1">المستشعر</string>
+    <string name="sensorNotAvailableWarningText2">غير متوفر. يعني هذا عادةً أن جهازك ببساطة لا يحتوي على هذا النوع من المستشعرات.</string>
+    <string name="sensorNotAvailableWarningMoreInfo">المزيد من المعلومات</string>
+    <string name="sensorNotAvailableWarningMoreInfoURL">http://phyphox.org/faq/#faqMissingSensor</string>
+    <string name="ok">موافق</string>
+    <string name="tryagain">إعادة المحاولة</string>
+    <string name="doContinue">متابعة</string>
+    <string name="close">إغلاق</string>
+    <string name="next">التالي</string>
+    <string name="cancel">إلغاء</string>
+    <string name="unknown">غير معروف</string>
+    <string name="rename">تغيير الإسم</string>
+    <string name="delete">حذف</string>
+    <string name="confirmDelete">هل تريد حقًا حذف هذه التجربة من مجموعتك؟</string>
+    <string name="confirmDeleteTitle">تأكيد الحذف؟</string>
+    <string name="stop">إيقاف</string>
+    <string name="start">تشغيل</string>
+    <string name="clear_data">مسح البيانات</string>
+    <string name="clear_data_question">هل تريد مسح البيانات المسجلة؟</string>
+    <string name="clear">مسح</string>
+    <string name="leave_experiment">مغادرة التجربة</string>
+    <string name="leave_experiment_question">هل تريد الخروج من هذه التجربة و التخلص من البيانات المسجلة؟</string>
+    <string name="leave">خروج</string>
+    <string name="timed_stop">إيقاف التشغيل المؤقت</string>
+    <string name="timed_start">بدء التشغيل المؤقت</string>
+    <string name="loadingTitle">جاري التحميل</string>
+    <string name="loadingText">جاري تحميل التجربة…</string>
+    <string name="loadingBluetoothConnectionText">جاري الإتصال بجهاز البلوتوث…</string>
+    <string name="timedRunDialogTitle">التشغيل المؤقت</string>
+    <string name="timedRunStartDelay">مهلة تأخير البدء (ث)</string>
+    <string name="timedRunStopDelay">مدة التجربة (ث)</string>
+    <string name="enableTimedRun">إجراء تشغيل مؤقت</string>
+    <string name="export">تصدير البيانات</string>
+    <string name="export_empty">لم يتم تعريف أي بيانات قابلة للتصدير في إعدادات هذه التجربة. إذا كان هذا خطأََ،يرجى التواصل مع الجهة التي وفرت رمز QR أو ملف الإعدادات.</string>
+    <string name="export_subject">بيانات من phyphox</string>
+    <string name="export_pick_share">اختر وسيلة التصدير</string>
+    <string name="share">مشاركة لقطة الشاشة</string>
+    <string name="share_subject">لقطة شاشة من phyphox</string>
+    <string name="share_pick_share">اختر وسيلة للمشاركة</string>
+    <string name="remoteServer">السماح بالوصول عن بعد</string>
+    <string name="remoteServerWarning">أنت على وشك تفعيل الوصول عن بعد للبيانات المجمَّعة. يجب القيام بذالك فقط على شبكة موثوقة! كما يجب ملاحظة أن الوصول المباشر بين الأجهزة قد لا يكون ممكنًا على العديد من شبكات الشركات أو الجامعات.
+\n
+\nلأفضل مستوى من الأمان و الأداء، يُوصى بالاتصال بهذا الجهاز بتفعيل ( نقطة اتصال الهاتف المحمول) و الإرتباط من خلالها.
+\n
+\nبعد الضغط على \"موافق\"، يمكنك الوصول إلى قياساتك من أي متصفح ويب على نفس الشبكة.</string>
+    <string name="remoteServerWarningTitle">تحذير أمني!</string>
+    <string name="remoteServerNoNetwork">تحتاج أولا إلى إعداد إتصال Wi-Fi بالجهاز الآخر. يرجى تفعيل Wi-Fi أو إنشاء نقطة اتصال للهاتف المحمول.</string>
+    <string name="remoteServerActive">تم تفعيل الوصول عن بُعد. يمكنك الوصول إلى هذه التجربة من خلال العنوان التالى:
+\n%1$s</string>
+    <string name="hotspotSettings">إعدادات نقطة الاتصال</string>
+    <string name="remoteColorMapWarning">يعد الرسم البياني الملون في واجهة التحكم عن بعد مجرد تقريب فقط. وبخلاف الرسم البياني داخل التطبيق، فإنه لا يمكنه حاليا التعامل مع البيانات غير متساوية الفواصل (non-equidistant data) أو المقياس اللوغاريتمي على المحور الأفقي X و المحور العمودي Y. لذا، قد تظهر البيانات ذات الفواصل الزمنية المتغيرة في غير مكانها الصحيح.</string>
+    <string name="remoteDepthGUIWarning">حاليا لا يتم دعم المعاينة والتحكم عن بُعد في مستشعر LiDAR/ToF.</string>
+    <string name="calibrated_magnetometer">استخدام مقياس مغناطيسي مضبوط</string>
+    <string name="force_gnss">الموقع عبر الأقمار الصناعية فقط</string>
+    <string name="switchToPhoneLayout">وضع العرض: ضيق</string>
+    <string name="switchColumns1">وضع العرض: عمود واحد</string>
+    <string name="switchColumns2">وضع العرض: عمودان</string>
+    <string name="switchColumns3">وضع العرض: ثلاثة أعمدة</string>
+    <string name="toggleBrightMode">الوضع الفاتح</string>
+    <string name="fontSize">حجم الخط</string>
+    <string name="show_description">معلومات التجربة</string>
+    <string name="save_locally">إضافة التجربة إلى المجموعة</string>
+    <string name="save_locally_done">تمت إضافة التجربة إلى المجموعة بنجاح.</string>
+    <string name="save_locally_message">تم فتح هذه التجربة من مصدر خارجي. هل تريد إضافتها إلى مجموعة تجاربك؟</string>
+    <string name="save_locally_button">حفظ في المجموعة</string>
+    <string name="save_state">حفظ حالة التجربة</string>
+    <string name="save_state_category">حالات التجارب المحفوظة</string>
+    <string name="save_state_message">يمكنك حفظ وظعية هذه التجربة بما في ذالك بياناتك في مجموعتك، أو مشاركتها مع تطبيق خارجي.</string>
+    <string name="save_state_title">العنوان</string>
+    <string name="save_state_save">إلى المجموعة</string>
+    <string name="save_state_share">مشاركة</string>
+    <string name="save_state_subject">حالة تجربة phyphox</string>
+    <string name="save_state_default_title">القياس</string>
+    <string name="save_state_success">تم حفظ الحالة في مجموعتك.</string>
+    <string name="open_zip_title">فتح مجموعة التجارب</string>
+    <string name="open_zip_dialog_instructions">يحتوي هذا المورد على تجارب متعددة.يمكنك إما اختيار واحدة لفتحها وحفظها في مجموعتك اختيارياً، أو استخدام الزر أدناه لحفظها جميعاً في مجموعتك دفعة واحدة.</string>
+    <string name="open_save_all">حفظ الجميع</string>
+    <string name="open_bluetooth_assets_title">التجارب الخاصة بجهاز البلوتوث</string>
+    <string name="open_bluetooth_assets">تتوفر هذه التجارب لجهازك من phyphox. يمكنك فتحها واستخدامها مباشرة، أو إضافتها جميعا إلى مجموعتك للوصول إليها بسهولة من القائمة الرئيسية.</string>
+    <string name="timedRun">تشغيل محدد بوقت</string>
+    <string name="pick_exportSets">اختر مجموعات البيانات لتصديرها.</string>
+    <string name="pick_exportFormat">اختر صيغة البيانات.</string>
+    <string name="noDrawableData">لا توجد بيانات قابلة للرسم.</string>
+    <string name="categoryNewExperiment">تجارب بسيطة مخصَّصة</string>
+    <string name="categoryRawSensor">المستشعرات الخام</string>
+    <string name="categoryPhyphoxOrg">ساهم في تطوير phyphox</string>
+    <string name="categoryPhyphoxOrgHint">توجد خيارات جديدة لدعم phyphox في أسفل القائمة.</string>
+    <string name="experimentinfo_hint">تحقق من معلومات التجربة لمعرفة كيفية استخدامها.</string>
+    <string name="start_hint">اضغط على المثلث لبدء التجربة.</string>
+    <string name="bluetooth">بلوتوث منخفض الطاقة</string>
+    <string name="bt_android_version">تقنية \"بلوتوث منخفض الطاقة\" غير مدعومة في إصدارات أندرويد الأقدم من 4.3.</string>
+    <string name="bt_pick_device">يرجى اختيار جهاز.</string>
+    <string name="bt_scanning_generic">جاري البحث عن أجهزة بلوتوث…</string>
+    <string name="bt_scanning_specific1">جاري البحث عن أجهزة بلوتوث باستخدام</string>
+    <string name="bt_scanning_specific2">يحتوي اسمها على…</string>
+    <string name="bt_device_not_supported">لا توجد تجربة متاحة.</string>
+    <string name="bt_location_explanation">يتطلب نظام أندرويد إذن الوصول إلى الموقع للقيام بالبحث بإستخدام البلوتوث، حيث يمكن استخدام نتائج البحث لاستنتاج معلومات الموقع الجغرافي.سنقوم الآن بطلب هذه الأذونات؛ ستحتاج لمنحها لتمكين البحث عن أجهزة البلوتوث.</string>
+    <string name="bt_location_service_explanation">بالإضافة إلى إذن الوصول إلى معلومات الموقع، يتطلب نظام أندرويد تفعيل خدمات الموقع للقيام بعمليات البحث بالبلوتوث، حيث يمكن استخدام نتائج البحث لاستنتاج معلومات الموقع الجغرافي. سنقوم الآن بتوجيهك إلى إعدادات النظام.</string>
+    <string name="sensorGravity">الجاذبية</string>
+    <string name="settings">الإعدادات</string>
+    <string name="settingsHeadAdvanced">إعدادات متقدمة</string>
+    <string name="settingsProximityLock">قفل التقارب</string>
+    <string name="settingsProximityLockDetail">أوقف تشغيل الشاشة عند تفعيل حساس التقارب لتجنب أي مدخلات غير مرغوب فيها، كما يحدث عند وضع الهاتف في الجيب مثلاً.</string>
+    <string name="settingsPort">منفذ الوصول عن بُعد</string>
+    <string name="remoteCameraPreviewWarning">حالياً لا يتم دعم المعاينة والتحكم عن بُعد في الكاميرا.</string>
+    <string name="download">تنزيل</string>
+    <string name="savedToDownloadsMessage">تم حفظ الملف في \"التنزيلات\"</string>
+    <string name="permissionRequiredToSaveToDownloads">مطلوب إذن الوصول إلى وحدة التخزين لحفظ الملفات في \"التنزيلات\"</string>
+    <string name="errorWritingStateFile">حدث خطأ أثناء كتابة ملف الحالة:</string>
 </resources>
