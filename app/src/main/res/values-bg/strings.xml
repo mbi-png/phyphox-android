@@ -82,7 +82,7 @@
     <string name="sensorHumidity">Влажност</string>
     <string name="sensorProximity">Близост</string>
     <string name="sensorAttitude">Ориентация</string>
-    <string name="sensorVendor"></string>
+    <string name="sensorVendor">Специфичен за производителя</string>
     <string name="sensorDepth">Разстояние (LiDAR/ToF)</string>
     <string name="sensorCamera">Камера</string>
     <string name="location">Местоположение</string>
@@ -101,8 +101,8 @@
     <string name="delete">Изтрий</string>
     <string name="confirmDelete">Желаете ли да изтриете този експеримент от набора ви\?</string>
     <string name="confirmDeleteTitle">Потвърждавате ли изтриването\?</string>
-    <string name="stop">Спри</string>
-    <string name="start">Стартирай</string>
+    <string name="stop">Спиране</string>
+    <string name="start">Начало</string>
     <string name="clear_data">Изчисти данните</string>
     <string name="clear_data_question">Да се изчистят ли записаните данни\?</string>
     <string name="clear">Изчисти</string>
@@ -168,4 +168,7 @@
     <string name="open_zip_dialog_instructions">Този ресурс съдържа няколко експеримента. Може да изберете един за отваряне с възможност за запазване в колекцията си, или да използвате буртона по-долу за да запазите в колекцията си всичките наведнъж.</string>
     <string name="open_save_all">Запазване на всички</string>
     <string name="open_bluetooth_assets_title">Експерименти за Bluetooth устройство</string>
+    <string name="settingsProximityLock">Заключване чрез сензора за близост</string>
+    <string name="settingsProximityLockDetail">Изключете екрана при активиране на сензора за близост, за да избегнете неволни докосвания, например когато телефонът е в джоба ви.</string>
+    <string name="settingsPort">Порт за отдалечен достъп</string>
 </resources>
