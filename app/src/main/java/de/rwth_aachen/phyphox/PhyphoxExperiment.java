@@ -1,6 +1,7 @@
 package de.rwth_aachen.phyphox;
 
 import android.app.Activity;
+import android.content.Context;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.media.AudioFormat;
@@ -121,6 +122,8 @@ public class PhyphoxExperiment implements Serializable, ExperimentTimeReference.
     boolean appendAudioInput = false; //Append audio input on start of analysis cycle instead of replacing old data
     boolean forceAudioRecordingCompatibilityFormat = false; //Some Xiaomi device do not properly work with ENCODING_PCM_FLOAT if the Google Assistent voice trigger is enabled. This forces the use of the good old 16bit int format
 
+    //Parameters for flash light
+    public FlashlightOutput flashlightOutput = null;
     //Network connections
     List<NetworkConnection> networkConnections = new ArrayList<>();
 
@@ -665,5 +668,21 @@ public class PhyphoxExperiment implements Serializable, ExperimentTimeReference.
         }
 
         return null;
+    }
+
+    public void turnOnFlashlight(Context context){
+        if(cameraInput.getCamera() != null){
+            cameraInput.getCamera().getCameraControl().enableTorch(true);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            flashlightOutput.initHardware(context);
+            flashlightOutput.getManager().toggleFlash(true);
+        }
+    }
+
+    public void turnOffFlashLight(){
+        if(flashlightOutput.getManager() != null){
+            flashlightOutput.getManager().turnOff();
+        }
+
     }
 }

@@ -377,6 +377,45 @@ public abstract class PhyphoxFile {
         }
     }
 
+    private static class FlashlightBlockParser extends xmlBlockParser {
+        FlashlightOutput flashlightOutput;
+
+        FlashlightBlockParser(XmlPullParser xpp, PhyphoxExperiment experiment, Experiment parent, FlashlightOutput flashlightOutput) {
+            super(xpp, experiment, parent);
+            this.flashlightOutput = flashlightOutput;
+        }
+
+        @Override
+        protected void processStartTag(String tag) throws IOException, XmlPullParserException, phyphoxFileException {
+            // Handle nested tags like <input> for strobe rate modulation if desired
+            switch (tag.toLowerCase()) {
+                case "input": {
+                    DataInput input;
+                    String type = getStringAttribute("type");
+                    if (type == null)
+                        type = "buffer";
+
+                    if (type.equals("buffer")) {
+                        String bufferName = getText();
+                        DataBuffer buffer = experiment.getBuffer(bufferName);
+                        if (buffer == null) {
+                            throw new phyphoxFileException("Buffer \"" + bufferName + "\" not defined.", xpp.getLineNumber());
+                        }
+                        input = new DataInput(buffer, false);
+                    } else {
+                        throw new phyphoxFileException("Unknown input type \""+type+"\".", xpp.getLineNumber());
+                    }
+                    break;
+                }
+                default:
+                    throw new phyphoxFileException("Unexpected tag \"" + tag + "\"", xpp.getLineNumber());
+            }
+        }
+
+        @Override
+        protected void processEndTag(String tag) {}
+    }
+
     //Blockparser for AudioOutput plugin section
     private static class AudioOutputPluginBlockParser extends xmlBlockParser {
         AudioOutput audioOutput;
@@ -3394,6 +3433,15 @@ public abstract class PhyphoxFile {
                         experiment.bluetoothOutputs.add(b);
                     }
                     break;
+                }
+                case "flashlight":{
+                    int intensity = getIntAttribute("intensity", 1);
+                    int strobeRate = getIntAttribute("strobeRate", 10 );
+                    FlashlightOutput flashlightOutput = new FlashlightOutput(intensity, strobeRate);
+                    (new FlashlightBlockParser(xpp, experiment, parent, flashlightOutput)).process();
+                    experiment.flashlightOutput = flashlightOutput;
+                    break;
+
                 }
                 default: //Unknown tag...
                     throw new phyphoxFileException("Unknown tag "+tag, xpp.getLineNumber());
