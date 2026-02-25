@@ -1,21 +1,29 @@
 package de.rwth_aachen.phyphox
 
 import android.content.Context
+import android.graphics.SurfaceTexture
 import android.hardware.Camera
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraManager
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
-import androidx.annotation.RequiresApi
-import android.graphics.SurfaceTexture
+import androidx.camera.core.CameraControl
 
-class FlashLightManager(context: Context) {
+class FlashLightManager(context: Context, private var cameraControl: CameraControl? = null) {
 
     private var camera: Camera? = null // For API 21/22
+
     private val cameraManager = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
     } else null
     private var cameraId: String? = null
+
+    private val handler = Handler(Looper.getMainLooper())
+    private var isFlashOn = false
+    private var isStrobeRunning = false
+    private var currentStrobeRate: Int = 0
 
     init {
         try {
@@ -24,6 +32,16 @@ class FlashLightManager(context: Context) {
             Log.e("FlashLightManager", "Could not access camera", e)
         }
     }
+
+    fun performToggle(enabled: Boolean) {
+        if (cameraControl != null) {
+            cameraControl?.enableTorch(enabled)
+        } else {
+            toggleFlash(enabled)
+        }
+    }
+
+
 
     fun toggleFlash(isEnabled: Boolean) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -62,7 +80,40 @@ class FlashLightManager(context: Context) {
         } catch (e: Exception) { e.printStackTrace() }
     }
 
-    fun turnOff() {
-        toggleFlash(false)
+    private val strobeRunnable = object : Runnable {
+        override fun run() {
+            if (!isStrobeRunning) return
+
+            isFlashOn = !isFlashOn
+
+            performToggle(isFlashOn)
+
+            val delay = if (currentStrobeRate > 0) (1000 / (currentStrobeRate * 2)).toLong() else 100L
+
+            handler.postDelayed(this, delay)
+        }
+    }
+
+    fun startStrobe(rateHz: Int) {
+        if (rateHz <= 0) {
+            stopStrobe()
+            return
+        }
+        this.currentStrobeRate = rateHz
+        if (!isStrobeRunning) {
+            isStrobeRunning = true
+            handler.post(strobeRunnable)
+        }
+    }
+
+    fun stopStrobe() {
+        isStrobeRunning = false
+        handler.removeCallbacks(strobeRunnable)
+        performToggle(false)
+        isFlashOn = false
+    }
+
+    fun turnOfFlashLight(){
+        performToggle(false)
     }
 }

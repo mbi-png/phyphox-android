@@ -669,25 +669,4 @@ public class PhyphoxExperiment implements Serializable, ExperimentTimeReference.
 
         return null;
     }
-
-    public void turnOnFlashlight(Context context){
-        if(cameraInput.getCamera() != null){
-            cameraInput.getCamera().getCameraControl().enableTorch(true);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            flashlightOutput.initHardware(context);
-            flashlightOutput.getManager().toggleFlash(true);
-        }
-    }
-
-    public void turnOffFlashLight(){
-        if(cameraInput.getCamera() != null){
-            cameraInput.getCamera().getCameraControl().enableTorch(false);
-        } else {
-            if(flashlightOutput.getManager() != null){
-                flashlightOutput.getManager().turnOff();
-            }
-        }
-
-
-    }
 }

@@ -45,6 +45,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.camera.core.CameraControl;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentContainerView;
@@ -3123,10 +3124,16 @@ public class ExpView implements Serializable{
 
                 // if flashlight uses toggle element
                 if(experiment.flashlightOutput != null){
+                    // experimenting with stobe.
                     if(b){
-                        experiment.turnOnFlashlight(c);
+                        CameraControl cameraControl = null;
+                        if(experiment.cameraInput.getCamera() != null){
+                            cameraControl = experiment.cameraInput.getCamera().getCameraControl();
+                        }
+                        experiment.flashlightOutput.initHardware(c, cameraControl);
+                        experiment.flashlightOutput.getManager().startStrobe(20);
                     } else {
-                        experiment.turnOffFlashLight();
+                        experiment.flashlightOutput.getManager().stopStrobe();
                     }
                 }
             });
