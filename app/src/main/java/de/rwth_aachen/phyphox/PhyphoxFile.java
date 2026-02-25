@@ -1897,6 +1897,53 @@ public abstract class PhyphoxFile {
                     newView.elements.add(sliderElement);
                     break;
                 }
+                case "flashlight" : {
+                    Vector<String> outStrings = new Vector<>();
+                    Vector<String> stroberateoutStrings = new Vector<>();
+                    Vector<String> lightintensityoutStrings = new Vector<>();
+                    ioBlockParser.ioMapping[] outputMapping = {
+                            new ioBlockParser.ioMapping() {{name = "flashlight"; asRequired = false; minCount = 1; maxCount = 1; }},
+                            new ioBlockParser.ioMapping() {{name = "stroberate"; asRequired = false; minCount = 1; maxCount = 1; }},
+                            new ioBlockParser.ioMapping() {{name = "lightintensity"; asRequired = false; minCount = 1; maxCount = 1; }}
+                    };
+                    (new ioBlockParser(xpp, experiment, parent, null, outputs, null, outputMapping, "value")).process();
+                    outStrings.add(outputs.get(0).buffer.name);
+                    stroberateoutStrings.add(outputs.get(1).buffer.name);
+                    lightintensityoutStrings.add(outputs.get(2).buffer.name);
+
+                    ExpView.toggleElement toggleElement = newView.new toggleElement("FlashLight", visibility, null, outStrings, parent.getResources());
+
+                    double minValue = getDoubleAttribute("minValue", 0.0);
+                    double maxValue = getDoubleAttribute("maxValue", 1.0);
+                    int precision = getIntAttribute("precision", 2);
+                    RGB color = getColorAttribute("color", new RGB(parent.getResources().getColor(R.color.phyphox_white_100)));
+
+                    ExpView.sliderElement sliderElement = newView.new sliderElement("Strobe Intensity Control", visibility, stroberateoutStrings, null, parent.getResources());
+                    sliderElement.setDefaultValue(0.0);
+                    sliderElement.setColor(color);
+                    sliderElement.setMinValue(minValue);
+                    sliderElement.setMaxValue(maxValue);
+                    sliderElement.setStepSize(1.0);
+                    sliderElement.setPrecision(precision);
+                    sliderElement.setType(ExpView.SliderType.Normal);
+                    sliderElement.setShowValue(true);
+
+                    ExpView.sliderElement sliderElement2 = newView.new sliderElement("Light Intensity", visibility, lightintensityoutStrings, null, parent.getResources());
+                    sliderElement2.setDefaultValue(0.0);
+                    sliderElement2.setColor(color);
+                    sliderElement2.setMinValue(minValue);
+                    sliderElement2.setMaxValue(maxValue);
+                    sliderElement2.setStepSize(1.0);
+                    sliderElement2.setPrecision(precision);
+                    sliderElement2.setType(ExpView.SliderType.Normal);
+                    sliderElement2.setShowValue(true);
+
+                    newView.elements.add(toggleElement);
+                    newView.elements.add(sliderElement);
+                    newView.elements.add(sliderElement2);
+                    break;
+
+                }
                 default: //Unknown tag...
                     throw new phyphoxFileException("Unknown tag "+tag, xpp.getLineNumber());
             }
