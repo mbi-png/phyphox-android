@@ -680,9 +680,14 @@ public class PhyphoxExperiment implements Serializable, ExperimentTimeReference.
     }
 
     public void turnOffFlashLight(){
-        if(flashlightOutput.getManager() != null){
-            flashlightOutput.getManager().turnOff();
+        if(cameraInput.getCamera() != null){
+            cameraInput.getCamera().getCameraControl().enableTorch(false);
+        } else {
+            if(flashlightOutput.getManager() != null){
+                flashlightOutput.getManager().turnOff();
+            }
         }
+
 
     }
 }
