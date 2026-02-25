@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.SurfaceTexture
 import android.hardware.Camera
 import android.hardware.camera2.CameraAccessException
+import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.os.Build
 import android.os.Handler
@@ -18,18 +19,21 @@ class FlashLightManager(context: Context, private var cameraControl: CameraContr
     private val cameraManager = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
     } else null
-    private var cameraId: String? = null
+    private val cameraId: String? = try { cameraManager?.cameraIdList?.getOrNull(0) } catch (e: Exception) { null }
 
     private val handler = Handler(Looper.getMainLooper())
     private var isFlashOn = false
     private var isStrobeRunning = false
     private var currentStrobeRate: Int = 0
+    private var currentIntensity: Int = 1
 
-    init {
-        try {
-            cameraId = cameraManager?.cameraIdList?.getOrNull(0) // rear camera with flash is usually the first ID
-        } catch (e: CameraAccessException){
-            Log.e("FlashLightManager", "Could not access camera", e)
+    // Get the maximum strength level supported by the device
+    private val maxIntensityLevel: Int by lazy {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && cameraId != null) {
+            val chars = cameraManager?.getCameraCharacteristics(cameraId)
+            chars?.get(CameraCharacteristics.FLASH_INFO_STRENGTH_MAXIMUM_LEVEL) ?: 1
+        } else {
+            1
         }
     }
 
@@ -40,6 +44,7 @@ class FlashLightManager(context: Context, private var cameraControl: CameraContr
             toggleFlash(enabled)
         }
     }
+
 
 
 
@@ -111,6 +116,25 @@ class FlashLightManager(context: Context, private var cameraControl: CameraContr
         handler.removeCallbacks(strobeRunnable)
         performToggle(false)
         isFlashOn = false
+    }
+
+    fun setIntensity(level: Int) {
+        Log.d("FlashLight", "maxintensity" +maxIntensityLevel)
+        val id = cameraId ?: return
+
+        // when camera in use, cannot person intensity control, not available yet
+        if(cameraControl != null){ return }
+
+        this.currentIntensity = level
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && maxIntensityLevel > 1) {
+            // Ensure currentIntensity is within 1 to maxIntensityLevel
+            val level = currentIntensity.coerceIn(1, maxIntensityLevel)
+            cameraManager?.turnOnTorchWithStrengthLevel(id, level)
+        } else {
+            // controlling intensity not supported for lower version than Android 33
+        }
     }
 
     fun turnOfFlashLight(){

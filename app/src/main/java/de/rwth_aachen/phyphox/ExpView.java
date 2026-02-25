@@ -3127,11 +3127,13 @@ public class ExpView implements Serializable{
                     // experimenting with stobe.
                     if(b){
                         CameraControl cameraControl = null;
-                        if(experiment.cameraInput.getCamera() != null){
+                        if(experiment.cameraInput != null){
                             cameraControl = experiment.cameraInput.getCamera().getCameraControl();
                         }
                         experiment.flashlightOutput.initHardware(c, cameraControl);
-                        experiment.flashlightOutput.getManager().startStrobe(20);
+
+                        experiment.flashlightOutput.getManager().setIntensity(40);
+                        experiment.flashlightOutput.getManager().startStrobe(2);
                     } else {
                         experiment.flashlightOutput.getManager().stopStrobe();
                     }
