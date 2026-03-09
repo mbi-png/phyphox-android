@@ -1,22 +1,40 @@
 package de.rwth_aachen.phyphox;
 
 import android.content.Context;
+import android.hardware.camera2.CameraManager;
+import android.util.Log;
 
 import androidx.camera.core.CameraControl;
 
 public class FlashlightOutput {
-    private final int intensity;
-    private final int strobeRate;
+    private String parameter;
+    private DataInput dataInput;
+    private Integer intensity;
+    private double frequency;
     private FlashLightManager flashLightManager;
+    private CameraManager cameraManager;
 
-    public FlashlightOutput(int intensity, int strobeRate) {
-        this.intensity = intensity;
-        this.strobeRate = strobeRate;
+    public FlashlightOutput(CameraManager cameraManager) {
+        this.cameraManager = cameraManager;
+
     }
 
     // This is called later by the Activity/Experiment controller
-    public void initHardware(Context context, CameraControl cameraControl) {
-        this.flashLightManager = new FlashLightManager(context, cameraControl);
+    public void initHardware(CameraControl cameraControl) {
+        this.flashLightManager = new FlashLightManager(cameraManager, cameraControl);
+    }
+
+    public void setParameter(String parameter, DataInput input) throws PhyphoxFile.phyphoxFileException {
+        this.parameter = parameter;
+        this.dataInput = input;
+
+        final var inputValue = (input.isBuffer) ? input.buffer.value : input.value;
+
+        switch (parameter){
+            case "frequency": frequency = inputValue; break;
+            case "intensity": intensity = (int) inputValue; break;
+            default: throw new PhyphoxFile.phyphoxFileException("Unexpected flashlight input parameter.");
+        }
     }
 
     public FlashLightManager getManager() {
@@ -28,10 +46,16 @@ public class FlashlightOutput {
 
     public void start() {
         if (flashLightManager != null) {
-            if (strobeRate > 0) {
-                flashLightManager.startStrobe(strobeRate);
+            if(intensity == 0) return;
+            var turnOnFlashWithIntensity = intensity > 1;
+            if (frequency > 0) {
+                flashLightManager.startStrobe(frequency);
             } else {
-                flashLightManager.performToggle(true);
+                if(turnOnFlashWithIntensity){
+                    flashLightManager.setIntensity(intensity);
+                } else {
+                    flashLightManager.performToggle(true);
+                }
             }
         }
     }
@@ -42,5 +66,5 @@ public class FlashlightOutput {
         }
     }
 
-    public int getStrobeRate() { return strobeRate; }
+    public double getStrobeRate() { return frequency; }
 }

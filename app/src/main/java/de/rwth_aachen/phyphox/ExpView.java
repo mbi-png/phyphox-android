@@ -3121,23 +3121,6 @@ public class ExpView implements Serializable{
             switchView.setOnCheckedChangeListener((compoundButton, b) -> {
                 compoundButton.setChecked(b);
                 triggered = true;
-
-                // if flashlight uses toggle element
-                if(experiment.flashlightOutput != null){
-                    // experimenting with stobe.
-                    if(b){
-                        CameraControl cameraControl = null;
-                        if(experiment.cameraInput != null){
-                            cameraControl = experiment.cameraInput.getCamera().getCameraControl();
-                        }
-                        experiment.flashlightOutput.initHardware(c, cameraControl);
-
-                        experiment.flashlightOutput.getManager().setIntensity(40);
-                        experiment.flashlightOutput.getManager().startStrobe(2);
-                    } else {
-                        experiment.flashlightOutput.getManager().stopStrobe();
-                    }
-                }
             });
 
             rootView = row;

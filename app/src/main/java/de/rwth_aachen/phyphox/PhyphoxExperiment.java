@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import androidx.camera.core.CameraControl;
 import androidx.collection.ArraySet;
 
 import org.w3c.dom.Attr;
@@ -413,6 +414,10 @@ public class PhyphoxExperiment implements Serializable, ExperimentTimeReference.
         if (cameraInput != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             cameraInput.stop();
 
+        if(flashlightOutput != null){
+            flashlightOutput.getManager().stopStrobe();
+        }
+
         for (NetworkConnection networkConnection : networkConnections)
             networkConnection.stop();
 
@@ -469,6 +474,15 @@ public class PhyphoxExperiment implements Serializable, ExperimentTimeReference.
 
         if (cameraInput != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             cameraInput.start();
+
+        if(flashlightOutput != null){
+            CameraControl cameraControl = null;
+            if(cameraInput != null){
+                cameraControl = cameraInput.getCamera().getCameraControl();
+            }
+            flashlightOutput.initHardware(cameraControl);
+            flashlightOutput.start();
+        }
 
 
         //Playback
