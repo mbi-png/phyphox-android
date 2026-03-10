@@ -1,6 +1,5 @@
 package de.rwth_aachen.phyphox
 
-import android.content.Context
 import android.graphics.SurfaceTexture
 import android.hardware.Camera
 import android.hardware.camera2.CameraCharacteristics
@@ -8,20 +7,20 @@ import android.hardware.camera2.CameraManager
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.camera.core.CameraControl
+import kotlin.math.max
+import kotlin.math.min
 
 class FlashLightManager(private var cameraManager: CameraManager?, private var cameraControl: CameraControl? = null) {
 
     private var camera: Camera? = null // For API 21/22
-
     private val cameraId: String? = try { cameraManager?.cameraIdList?.getOrNull(0) } catch (e: Exception) { null }
-
     private val handler = Handler(Looper.getMainLooper())
     private var isFlashOn = false
     private var isStrobeRunning = false
     private var currentStrobeRate: Double = 0.0
     private var currentIntensity: Int = 1
+    private var maxStrobeRate : Double = 30.0 //Normally after 30 strobe rate there is not visible strobe as blinking becomes fast. But the number depends upon devices
 
     // Get the maximum strength level supported by the device
     private val maxIntensityLevel: Int by lazy {
@@ -44,7 +43,6 @@ class FlashLightManager(private var cameraManager: CameraManager?, private var c
     fun toggleFlash(isEnabled: Boolean) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             // Modern Way (API 23+)
-
             try {
                 val cameraId = cameraManager?.cameraIdList?.getOrNull(0)
                 cameraId?.let { cameraManager?.setTorchMode(it, isEnabled) }
@@ -98,7 +96,7 @@ class FlashLightManager(private var cameraManager: CameraManager?, private var c
             stopStrobe()
             return
         }
-        this.currentStrobeRate = rateHz
+        this.currentStrobeRate = rateHz.coerceIn(0.1, maxStrobeRate)
         if (!isStrobeRunning) {
             isStrobeRunning = true
             handler.post(strobeRunnable)
@@ -115,15 +113,13 @@ class FlashLightManager(private var cameraManager: CameraManager?, private var c
     fun setIntensity(level: Int) {
         val id = cameraId ?: return
 
-        // when camera in use, cannot person intensity control, not available yet
+        // when camera in use, person cannot control intensity
         if(cameraControl != null){ return }
 
-        this.currentIntensity = level
+        this.currentIntensity = level.coerceIn(1, maxIntensityLevel)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && maxIntensityLevel > 1) {
-            // Ensure currentIntensity is within 1 to maxIntensityLevel
-            val level = currentIntensity.coerceIn(1, maxIntensityLevel)
-            cameraManager?.turnOnTorchWithStrengthLevel(id, level)
+            cameraManager?.turnOnTorchWithStrengthLevel(id, this.currentIntensity)
         } else {
             performToggle(true)
         }
