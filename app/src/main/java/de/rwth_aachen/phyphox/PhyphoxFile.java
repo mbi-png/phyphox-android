@@ -380,6 +380,8 @@ public abstract class PhyphoxFile {
     private static class FlashlightBlockParser extends xmlBlockParser {
         FlashlightOutput flashlightOutput;
 
+        FlashlightOutput.FlashlightController flashlightController = null;
+
         FlashlightBlockParser(XmlPullParser xpp, PhyphoxExperiment experiment, Experiment parent, FlashlightOutput flashlightOutput) {
             super(xpp, experiment, parent);
             this.flashlightOutput = flashlightOutput;
@@ -415,7 +417,17 @@ public abstract class PhyphoxFile {
                     } else {
                         throw new phyphoxFileException("Unknown input type \""+type+"\".", xpp.getLineNumber());
                     }
-                    flashlightOutput.setParameter(parameter, input);
+                    switch (parameter){
+                        case "intensity": {
+                            flashlightController = flashlightOutput.new FlashLightIntensity(input);
+                            break;
+                        }
+                        case "frequency":{
+                            flashlightController = flashlightOutput.new FlashLightStobe(input);
+                            break;
+                        }
+                        default: throw new PhyphoxFile.phyphoxFileException("Unexpected flashlight input parameter.");
+                    }
 
                     break;
                 }
@@ -425,7 +437,11 @@ public abstract class PhyphoxFile {
         }
 
         @Override
-        protected void processEndTag(String tag) {}
+        protected void processEndTag(String tag) {
+            if(flashlightOutput != null){
+                flashlightOutput.attachController(flashlightController);
+            }
+        }
     }
 
     //Blockparser for AudioOutput plugin section

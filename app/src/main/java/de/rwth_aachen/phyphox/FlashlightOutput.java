@@ -6,35 +6,19 @@ import android.util.Log;
 
 import androidx.camera.core.CameraControl;
 
+import java.util.ArrayList;
+
 public class FlashlightOutput {
-    private String parameter;
-    private DataInput dataInput;
-    private Integer intensity;
-    private double frequency;
     private FlashLightManager flashLightManager;
     private CameraManager cameraManager;
+    private ArrayList<FlashlightController> controllers = new ArrayList<>();
 
     public FlashlightOutput(CameraManager cameraManager) {
         this.cameraManager = cameraManager;
-
     }
 
-    // This is called later by the Activity/Experiment controller
     public void initHardware(CameraControl cameraControl) {
         this.flashLightManager = new FlashLightManager(cameraManager, cameraControl);
-    }
-
-    public void setParameter(String parameter, DataInput input) throws PhyphoxFile.phyphoxFileException {
-        this.parameter = parameter;
-        this.dataInput = input;
-
-        final var inputValue = (input.isBuffer) ? input.buffer.value : input.value;
-
-        switch (parameter){
-            case "frequency": frequency = inputValue; break;
-            case "intensity": intensity = (int) inputValue; break;
-            default: throw new PhyphoxFile.phyphoxFileException("Unexpected flashlight input parameter.");
-        }
     }
 
     public FlashLightManager getManager() {
@@ -44,27 +28,99 @@ public class FlashlightOutput {
         return null;
     }
 
-    public void start() {
-        if (flashLightManager != null) {
-            if(intensity == 0) return;
-            var turnOnFlashWithIntensity = intensity > 1;
-            if (frequency > 0) {
-                flashLightManager.startStrobe(frequency);
-            } else {
-                if(turnOnFlashWithIntensity){
-                    flashLightManager.setIntensity(intensity);
-                } else {
-                    flashLightManager.performToggle(true);
-                }
+    public void start(){
+        for(FlashlightController flashlightController: controllers){
+            if(!flashlightController.isActive()){
+                flashlightController.start();
             }
         }
     }
 
-    public void stop() {
-        if (flashLightManager != null) {
-            flashLightManager.turnOfFlashLight();
+    public void stop(){
+        for(FlashlightController flashlightController: controllers){
+            if(flashlightController.isActive()){
+                flashlightController.stop();
+            }
+
         }
     }
 
-    public double getStrobeRate() { return frequency; }
+    public void attachController(FlashlightController controller){
+        this.controllers.add(controller);
+    }
+
+    public abstract class FlashlightController {
+
+        public abstract boolean isActive();
+        public abstract void start();
+
+        public abstract void stop();
+    }
+
+    public class FlashLightStobe extends FlashlightController {
+
+        DataInput dataInput;
+        boolean strobeActive = false;
+
+        FlashLightStobe(DataInput input){
+            this.dataInput = input;
+        }
+
+        @Override
+        public void start() {
+            if (flashLightManager == null) return;
+            double frequency = dataInput.getValue();
+            if (frequency > 0) {
+                flashLightManager.startStrobe(frequency);
+                strobeActive = true;
+            }
+        }
+
+        @Override
+        public boolean isActive() { return strobeActive; }
+
+        @Override
+        public void stop() {
+            flashLightManager.stopStrobe();
+            strobeActive = false;
+
+        }
+
+    }
+
+    public class FlashLightIntensity extends FlashlightController {
+
+        DataInput dataInput;
+        public boolean flashLightActive = false;
+
+        FlashLightIntensity(DataInput input){
+            this.dataInput = input;
+        }
+
+        @Override
+        public void start() {
+            if (flashLightManager == null) return;
+
+            int intensity = (int) dataInput.getValue();
+            if(intensity == 0) return;
+
+            if(intensity > 1){
+                flashLightManager.setIntensity(intensity);
+            } else {
+                flashLightManager.performToggle(true);
+            }
+            flashLightActive = true;
+        }
+
+        @Override
+        public boolean isActive() { return flashLightActive; }
+
+        @Override
+        public void stop() {
+            if (flashLightManager != null) {
+                flashLightManager.turnOfFlashLight();
+                flashLightActive = false;
+            }
+        }
+    }
 }

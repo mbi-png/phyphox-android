@@ -106,8 +106,6 @@ class FlashLightManager(private var cameraManager: CameraManager?, private var c
     fun stopStrobe() {
         isStrobeRunning = false
         handler.removeCallbacks(strobeRunnable)
-        performToggle(false)
-        isFlashOn = false
     }
 
     fun setIntensity(level: Int) {
