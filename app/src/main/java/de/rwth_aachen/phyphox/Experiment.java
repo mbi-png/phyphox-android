@@ -630,10 +630,15 @@ public class Experiment extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void onFailure(Throwable error) {
                             if(experiment.flashlightOutput != null){
+                                //we allow flashlight to work if camera failed. needs testing.
                                 experiment.flashlightOutput.initHardware(null);
                             }
                     }
                 });
+
+            if(experiment.cameraInput == null && experiment.flashlightOutput != null){
+                experiment.flashlightOutput.initHardware(null);
+            }
 
 
             //Start the remote server if activated
