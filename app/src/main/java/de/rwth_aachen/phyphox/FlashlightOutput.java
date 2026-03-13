@@ -28,20 +28,21 @@ public class FlashlightOutput {
         return null;
     }
 
-    public void start(){
+    public void start(boolean restart){
+        Log.d("FlashlightOutput", "start");
         for(FlashlightController flashlightController: controllers){
-            if(!flashlightController.isActive()){
+            if(restart){
                 flashlightController.start();
             }
         }
     }
 
     public void stop(){
+        Log.d("FlashlightOutput", "stop");
         for(FlashlightController flashlightController: controllers){
             if(flashlightController.isActive()){
                 flashlightController.stop();
             }
-
         }
     }
 
@@ -102,7 +103,12 @@ public class FlashlightOutput {
             if (flashLightManager == null) return;
 
             int intensity = (int) dataInput.getValue();
-            if(intensity == 0) return;
+            if(intensity == 0) {
+                if(flashLightActive){
+                    flashLightManager.performToggle(false);
+                }
+                return;
+            }
 
             if(intensity > 1){
                 flashLightManager.setIntensity(intensity);

@@ -7,6 +7,7 @@ import android.hardware.camera2.CameraManager
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.camera.core.CameraControl
 import kotlin.math.max
 import kotlin.math.min

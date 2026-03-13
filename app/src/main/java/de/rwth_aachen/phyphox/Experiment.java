@@ -65,6 +65,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
+import androidx.camera.core.Camera;
+import androidx.camera.core.CameraControl;
+import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.app.NavUtils;
 import androidx.core.app.ShareCompat;
 import androidx.core.app.TaskStackBuilder;
@@ -107,6 +110,7 @@ import de.rwth_aachen.phyphox.Bluetooth.ConnectedDeviceInfo;
 import de.rwth_aachen.phyphox.Bluetooth.UpdateConnectedDeviceDelegate;
 import de.rwth_aachen.phyphox.Helper.DataExportUtility;
 import de.rwth_aachen.phyphox.Helper.WindowInsetHelper;
+import de.rwth_aachen.phyphox.camera.CameraInput;
 import de.rwth_aachen.phyphox.camera.depth.DepthInput;
 import de.rwth_aachen.phyphox.Helper.DecimalTextWatcher;
 import de.rwth_aachen.phyphox.Helper.Helper;
@@ -615,7 +619,22 @@ public class Experiment extends AppCompatActivity implements View.OnClickListene
             }
 
             if (experiment.cameraInput != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                experiment.cameraInput.startCameraFromProvider(this, this.getApplication());
+                experiment.cameraInput.startCameraFromProvider(this, this.getApplication(), new CameraInput.OnCameraReadyListener() {
+                    @Override
+                    public void onReady(Camera camera) {
+                            if(experiment.flashlightOutput != null){
+                                experiment.flashlightOutput.initHardware(camera.getCameraControl());
+                            }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable error) {
+                            if(experiment.flashlightOutput != null){
+                                experiment.flashlightOutput.initHardware(null);
+                            }
+                    }
+                });
+
 
             //Start the remote server if activated
             startRemoteServer();
@@ -2147,5 +2166,3 @@ public class Experiment extends AppCompatActivity implements View.OnClickListene
         void onError(String errorMessage);
     }
 }
-
-

@@ -278,6 +278,10 @@ public class PhyphoxExperiment implements Serializable, ExperimentTimeReference.
             }
         }
 
+        if(flashlightOutput != null){
+                flashlightOutput.start(newUserInput);
+        }
+
         newUserInput = false;
 
         if (measuring) {
@@ -318,10 +322,6 @@ public class PhyphoxExperiment implements Serializable, ExperimentTimeReference.
         //Play audio
         if (measuring && audioOutput != null) {
             audioOutput.play();
-        }
-
-        if(flashlightOutput != null){
-            flashlightOutput.start();
         }
 
         if (measuring && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
@@ -481,14 +481,6 @@ public class PhyphoxExperiment implements Serializable, ExperimentTimeReference.
         if (cameraInput != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             cameraInput.start();
 
-        if(flashlightOutput != null){
-            CameraControl cameraControl = null;
-            if(cameraInput != null){
-                cameraControl = cameraInput.getCamera().getCameraControl();
-            }
-            flashlightOutput.initHardware(cameraControl);
-            flashlightOutput.start();
-        }
 
 
         //Playback
