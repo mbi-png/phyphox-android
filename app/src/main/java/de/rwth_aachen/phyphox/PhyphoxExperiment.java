@@ -420,9 +420,6 @@ public class PhyphoxExperiment implements Serializable, ExperimentTimeReference.
         if (cameraInput != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             cameraInput.stop();
 
-        if(flashlightOutput != null){
-            flashlightOutput.stop();
-        }
 
         for (NetworkConnection networkConnection : networkConnections)
             networkConnection.stop();

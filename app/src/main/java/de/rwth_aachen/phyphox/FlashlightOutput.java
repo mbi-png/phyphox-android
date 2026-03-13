@@ -29,7 +29,6 @@ public class FlashlightOutput {
     }
 
     public void start(boolean restart){
-        Log.d("FlashlightOutput", "start");
         for(FlashlightController flashlightController: controllers){
             if(restart){
                 flashlightController.start();
@@ -38,7 +37,6 @@ public class FlashlightOutput {
     }
 
     public void stop(){
-        Log.d("FlashlightOutput", "stop");
         for(FlashlightController flashlightController: controllers){
             if(flashlightController.isActive()){
                 flashlightController.stop();
@@ -71,7 +69,10 @@ public class FlashlightOutput {
         public void start() {
             if (flashLightManager == null) return;
             double frequency = dataInput.getValue();
-            if (frequency > 0) {
+            if (frequency <= 0) {
+                flashLightManager.stopStrobe();
+                strobeActive = false;
+            } else {
                 flashLightManager.startStrobe(frequency);
                 strobeActive = true;
             }

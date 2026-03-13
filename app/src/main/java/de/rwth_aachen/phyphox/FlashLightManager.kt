@@ -93,10 +93,6 @@ class FlashLightManager(private var cameraManager: CameraManager?, private var c
     }
 
     fun startStrobe(rateHz: Double) {
-        if (rateHz <= 0) {
-            stopStrobe()
-            return
-        }
         this.currentStrobeRate = rateHz.coerceIn(0.1, maxStrobeRate)
         if (!isStrobeRunning) {
             isStrobeRunning = true
