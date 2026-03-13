@@ -324,6 +324,11 @@ public class Experiment extends AppCompatActivity implements View.OnClickListene
             }
             if (experiment.depthInput != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
                 experiment.depthInput.stopCameras();
+
+            if (experiment.flashlightOutput != null ){
+               experiment.flashlightOutput.stop();
+            }
+
         }
     }
 
