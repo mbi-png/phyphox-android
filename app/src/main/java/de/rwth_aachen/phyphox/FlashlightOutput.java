@@ -1,8 +1,6 @@
 package de.rwth_aachen.phyphox;
 
-import android.content.Context;
 import android.hardware.camera2.CameraManager;
-import android.util.Log;
 
 import androidx.camera.core.CameraControl;
 

@@ -20,6 +20,7 @@ class FlashLightManager(private var cameraManager: CameraManager?, private var c
     private var isFlashOn = false
     private var isStrobeRunning = false
     private var currentStrobeRate: Double = 0.0
+    private var lastStrobeRate : Double = 0.0
     private var currentIntensity: Int = 1
     private var maxStrobeRate : Double = 30.0 //Normally after 30 strobe rate there is not visible strobe as blinking becomes fast. But the number depends upon devices
 
@@ -96,7 +97,15 @@ class FlashLightManager(private var cameraManager: CameraManager?, private var c
         this.currentStrobeRate = rateHz.coerceIn(0.1, maxStrobeRate)
         if (!isStrobeRunning) {
             isStrobeRunning = true
+            lastStrobeRate = this.currentStrobeRate
             handler.post(strobeRunnable)
+        } else {
+            if((currentStrobeRate - lastStrobeRate) >= 0.1){
+                handler.removeCallbacks(strobeRunnable)
+                lastStrobeRate = this.currentStrobeRate
+                handler.post(strobeRunnable)
+            }
+
         }
     }
 
