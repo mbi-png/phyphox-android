@@ -1,46 +1,31 @@
-name: Build Phyphox Android APK
-
+name: Build Phyphox APK
 on:
-  push:
-    branches: [ master ]
   workflow_dispatch:
+  push:
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      ANDROID_HOME: /usr/local/lib/android/sdk
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.2.0
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4.4.0
+      - name: Set JDK 17
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Grant permissions
+        run: chmod +x gradlew
 
-      - name: Cache Gradle
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug
+      - name: Build APK
+        run: ./gradlew assembleRegularDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: phyphox-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: phyphox-apk
+          path: "**/build/outputs/apk/**/*.apk"
