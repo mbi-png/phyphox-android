@@ -1,31 +1,31 @@
-name: Build Phyphox APK
+name: Build Phyphox Android APK
+
 on:
-  workflow_dispatch:
   push:
-    branches: [master]
+    branches: [ master ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
+      - name: Checkout code
+        uses: actions/checkout@v4.2.0
 
-      - name: Set JDK 17
-        uses: actions/setup-java@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4.4.0
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Grant permissions
-        run: chmod +x gradlew
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
 
       - name: Build APK
-        run: ./gradlew assembleRegularDebug
+        run: ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: phyphox-apk
-          path: "**/build/outputs/apk/**/*.apk"
+          name: phyphox-debug-apk
+          path: app/build/outputs/apk/debug/*.apk
